@@ -8,8 +8,13 @@
   },
   "keywords": [],
   "author": "ourduelyst",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ourduelyst/CustomModesServer.git"
+  },
+  "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.14.0",
     "node": "0.0.0",
     "pg": "^6.1.2",
