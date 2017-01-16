@@ -32,7 +32,7 @@ pool.connect().then(function(client) {
         plug_id varchar(20) NOT NULL
     )`).on('end',
         function() {
-            client.query('CREATE INDEX player_ids ON games_in_play (p1_id, p2_id)');
+            client.query('CREATE INDEX IF NOT EXISTS player_ids ON games_in_play (p1_id, p2_id)');
             console.log('games_in_play created');
         });
     client.query(`CREATE TABLE IF NOT EXISTS plugin_installed(
