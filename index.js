@@ -21,7 +21,7 @@ const config = {
 };
 
 const pool = new Pool(config);
-const port = 5000;
+const port = (process.env.PORT || 5000);
 
 //Make our table if they aren't already
 pool.connect().then(function(client) {
@@ -69,6 +69,9 @@ app.put('/game/:plugID/:p1ID/:p2ID', function(req, res) {
         [req.params.p1ID, req.params.p2ID, req.params.plugID]).on('end', function() {
                 console.log('Created new game between' + req.params.p1ID + ' and ' + req.params.p2ID);
             });
+        client.on('drain', function() {
+            client.release();
+        });
     });
 });
 
