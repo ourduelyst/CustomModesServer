@@ -27,11 +27,14 @@ const port = 5000;
 pool.connect().then(function(client) {
     //Queue queries
     client.query(`CREATE TABLE IF NOT EXISTS games_in_play(
-        p1_id   char(20) PRIMARY KEY,
-        p2_id   char(20) PRIMARY KEY,
+        p1_id   char(20),
+        p2_id   char(20),
         plug_id varchar(20) NOT NULL
     )`).on('end',
-        function() {console.log('games_in_play created')});
+        function() {
+            client.query('CREATE INDEX player_ids ON games_in_play (p1_id, p2_id)');
+            console.log('games_in_play created');
+        });
     client.query(`CREATE TABLE IF NOT EXISTS plugin_installed(
         p1_id   char(20) NOT NULL,
         plug_id varchar(20) NOT NULL
